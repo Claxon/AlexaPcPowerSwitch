@@ -1,3 +1,12 @@
+// This sketch allows a Wemos D1 Mini ESP8266 board to turn a pc on and off using
+// the fauxmo library (alowing control via amazon Echo etc)
+// To use:
+// - Connect the Pwr header of a pc motherboard to the pin specified by PIN_POWERSWITCH
+//   I did this via an optocoupler.
+// - Feed the Power LED header into the build to close a switch on pin PIN_POWERDETECTOR
+//   Again I used an optocoupler. This is used to detect when power is being sent to the 
+//   PC case power LED, and thus to determine whether the machine is powered on.
+
 #include <Arduino.h>
 #ifdef ESP32
     #include <WiFi.h>
@@ -17,12 +26,9 @@ fauxmoESP fauxmo;
 #define SERIAL_BAUDRATE     115200
 
 #define LED_INDICATOR       LED_BUILTIN
-//#define PIN_POWERSWITCH     5 // Pin D1
 #define PIN_POWERDETECTOR   4 // Pin D2
-
 #define PIN_POWERSWITCH     13 // Pin D7
-//#define PIN_POWERDETECTOR   2 // Pin D4
-#define ID_SERVER            "media server"
+#define ID_SERVER            "media server" // The name of your server eg. "Alexa turn on 'media server'"
 
 // -----------------------------------------------------------------------------
 int buttonState;             // the current reading from the input pin
